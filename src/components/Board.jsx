@@ -1,141 +1,91 @@
 import { useState } from "react";
+import Column from "./Column";
 
 const Board = () => {
- 
-  const [tasks, setTasks] = useState({
-    todo: [
-      { id: "task1", text: "Don't you always call", assignee: "Finn" },
+  const [tasks, setTasks] = useState([
+    {
+      name: "Todo",
+      tasks: [{ id: 1, text: "Learn Next.js", assignee: "Faras" }],
+    },
+    {
+      name: "In Progress",
+      tasks: [
+        { id: 2, text: "Learn Advanced React.js", assignee: "Faras" },
+        { id: 3, text: "React Testing / Jest", assignee: "Faras" },
+        { id: 4, text: "Learn Advanced Concepts", assignee: "Faras" },
+      ],
+    },
+    {
+      name: "QA",
+      tasks: [],
+    },
+    {
+      name: "Done",
+      tasks: [
+        { id: 5, text: "Learn React.js", assignee: "Faras" },
+        { id: 6, text: "Learn Redux/Toolkit", assignee: "Faras" },
+        { id: 7, text: "Learn Context API", assignee: "Faras" },
+      ],
+    },
+  ]);
 
-    ],
-    inProgress: [
-      { id: "task2", text: "Always call", assignee: "Finn" },
-    ],
-  });
+  const [hide, setHide] = useState(false);
 
-
-  const onDragStart = (e,taskId, sourceColumn) => {
-    e.dataTransfer.setData('taskId', taskId)
-    e.dataTransfer.setData('sourceColumn', sourceColumn)
-  }
+  const onDragStart = (e, taskId, sourceColumn) => {
+    e.dataTransfer.setData("taskId", taskId.toString());
+    e.dataTransfer.setData("sourceColumn", sourceColumn);
+  };
 
   const onDragOver = (e) => {
-    e.preventDefault()
- 
-  }
+    e.preventDefault();
+  };
 
-
-  const onDrop = (e,targetColumn) => {
-    const taskId = e.dataTransfer.getData("taskId");
+  const onDrop = (e, targetColumn) => {
+    const taskId = parseInt(e.dataTransfer.getData("taskId"), 10);
     const sourceColumn = e.dataTransfer.getData("sourceColumn");
 
-
     if (sourceColumn === targetColumn) return;
-    const taskToMove = tasks[sourceColumn].find((task) => task.id === taskId);
 
-    setTasks((prevTasks) => ({
-      ...prevTasks,
-      [sourceColumn]: prevTasks[sourceColumn].filter((task) => task.id !== taskId),
-      [targetColumn]: [...prevTasks[targetColumn], taskToMove],
-    }));
-   
-  }
+    // Find the task and remove it from the source column
+    const sourceColumnObj = tasks.find((col) => col.name === sourceColumn);
+    const targetColumnObj = tasks.find((col) => col.name === targetColumn);
 
+    const taskToMove = sourceColumnObj.tasks.find((task) => task.id === taskId);
 
+    console.log(taskToMove);
 
+    // Remove task from the source column and add it to the target column
+    const updatedSourceColumnTasks = sourceColumnObj.tasks.filter(
+      (task) => task.id !== taskId
+    );
 
+    const updatedTargetColumnTasks = [...targetColumnObj.tasks, taskToMove];
+
+    // Update the tasks state with the new column tasks
+    const updatedTasks = tasks.map((col) => {
+      if (col.name === sourceColumn) {
+        return { ...col, tasks: updatedSourceColumnTasks };
+      } else if (col.name === targetColumn) {
+        return { ...col, tasks: updatedTargetColumnTasks };
+      }
+      return col;
+    });
+
+    setTasks(updatedTasks);
+  };
 
   return (
-    <div className="flex items-start justify-center p-6 space-x-6 bg-blue-200 min-h-screen">
-
-    <div className="w-1/4 bg-blue-50 shadow-lg"
-  
-    >
-      <h2 className="p-4 text-lg font-semibold text-gray-700 border-b border-blue-200">To Do</h2>
-      <div className="p-4 space-y-4 min-h-80" onDragOver={onDragOver} onDrop={(e) => onDrop(e,"todo")}>  
-      {tasks.todo.map(task => (
-             <div className="p-4 bg-white shadow flex items-start space-x-4" key={task.id} id={task.id} 
-             draggable
-              onDragStart={(e) => onDragStart(e,task.id,"todo")}
-             >
-             <img src="https://avatar.iran.liara.run/public/job/designer/male" alt="Finn" className="w-10 h-10 rounded-full" />
-             <div className="w-full">
-               <p className="text-gray-700">{task.text}</p>
-               <div className="flex justify-between items-center mt-2">
-               <p className="text-sm font-semibold text-blue-500 ">{task.assignee}</p>
-               <p className="text-xs text-gray-400">id:9</p>
-               </div>
-             </div>
-           </div>
+    <div className="flex items-start justify-center p-6 space-x-6 bg-blue-200 min-h-dvh">
+      {tasks.map((item, index) => (
+        <Column
+          key={index}
+          item={item}
+          onDragStart={onDragStart}
+          onDragOver={onDragOver}
+          onDrop={onDrop}
+        />
       ))}
-     
-      </div>
     </div>
-
-    <div className="w-1/4 bg-blue-50  shadow-lg ">
-      <h2 className="p-4 text-lg font-semibold text-gray-700 border-b border-blue-200">In Progress</h2>
-      <div className="p-4 space-y-4 min-h-80" onDragOver={onDragOver} onDrop={(e) => onDrop(e,"inProgress")}> 
-        {tasks.inProgress.map(inProgress => (
-             <div className="p-4 bg-white shadow flex items-start space-x-4" key={inProgress.id} id={inProgress.id}  
-             onDragStart={(e) => onDragStart(e, inProgress.id, "inProgress")}
-             draggable
-             >
-             <img src="https://avatar.iran.liara.run/public/job/designer/male" alt="Finn" className="w-10 h-10 rounded-full" />
-             <div  className="w-full">
-               <p className="text-gray-700">{inProgress.text}</p>
-               <div className="flex justify-between items-center mt-2">
-               <p className="text-sm font-semibold text-blue-500 ">{inProgress.assignee}</p>
-              <p className="text-xs text-gray-400">id:9</p>
-               </div>
-             </div>
-           </div>
-        ))}
-     
-      </div>
-    </div>
-    <div className="w-1/4 bg-blue-50  shadow-lg ">
-      <h2 className="p-4 text-lg font-semibold text-gray-700 border-b border-blue-200">QA</h2>
-      <div className="p-4 space-y-4 min-h-80" onDragOver={onDragOver} onDrop={(e) => onDrop(e,"inProgress")}> 
-        {tasks.inProgress.map(inProgress => (
-             <div className="p-4 bg-white shadow flex items-start space-x-4" key={inProgress.id} id={inProgress.id}  
-             onDragStart={(e) => onDragStart(e, inProgress.id, "inProgress")}
-             draggable
-             >
-             <img src="https://avatar.iran.liara.run/public/job/designer/male" alt="Finn" className="w-10 h-10 rounded-full" />
-             <div  className="w-full">
-               <p className="text-gray-700">{inProgress.text}</p>
-               <div className="flex justify-between items-center mt-2">
-               <p className="text-sm font-semibold text-blue-500 ">{inProgress.assignee}</p>
-              <p className="text-xs text-gray-400">id:9</p>
-               </div>
-             </div>
-           </div>
-        ))}
-     
-      </div>
-    </div>
-    <div className="w-1/4 bg-blue-50  shadow-lg ">
-      <h2 className="p-4 text-lg font-semibold text-gray-700 border-b border-blue-200">Done</h2>
-      <div className="p-4 space-y-4 min-h-80" onDragOver={onDragOver} onDrop={(e) => onDrop(e,"inProgress")}> 
-        {tasks.inProgress.map(inProgress => (
-             <div className="p-4 bg-white shadow flex items-start space-x-4" key={inProgress.id} id={inProgress.id}  
-             onDragStart={(e) => onDragStart(e, inProgress.id, "inProgress")}
-             draggable
-             >
-             <img src="https://avatar.iran.liara.run/public/job/designer/male" alt="Finn" className="w-10 h-10 rounded-full" />
-             <div  className="w-full">
-               <p className="text-gray-700">{inProgress.text}</p>
-               <div className="flex justify-between items-center mt-2">
-               <p className="text-sm font-semibold text-blue-500 ">{inProgress.assignee}</p>
-              <p className="text-xs text-gray-400">id:9</p>
-               </div>
-             </div>
-           </div>
-        ))}
-     
-      </div>
-    </div>
-
-  </div>
   );
 };
 
