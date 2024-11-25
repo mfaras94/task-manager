@@ -8,10 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./components/ProtectedRoute ";
 import DashboardPage from "./pages/DashboardPage";
 import HomePage from "./pages/HomePage";
-
+import Loader from "./components/Loader"
 function App() {
   return (
     <>
+      <Loader/>
       <ToastContainer
         position="bottom-right"
         autoClose={2000}
@@ -25,9 +26,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<DashboardPage />} />
           </Route>
-
           <Route path="/" element={<HomePage />} />
-
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="*" element={<NotFoundPage />} />
