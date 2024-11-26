@@ -1,7 +1,7 @@
 import TaskCard from "./TaskCard";
 
 const Column = ({ item, onDrop, onDragStart, onDragOver }) => (
-  <div className="w-1/4 bg-blue-50 shadow-lg ">
+  <div className="w-1/4 bg-white shadow-lg ">
     <h2 className="p-4 text-lg font-semibold text-gray-700 border-b border-blue-200">
       {item.name}
     </h2>

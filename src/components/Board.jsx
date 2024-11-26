@@ -1,35 +1,9 @@
 import { useState } from "react";
 import Column from "./Column";
-
+import db from "../../db.json"
 const Board = () => {
-  const [tasks, setTasks] = useState([
-    {
-      name: "Todo",
-      tasks: [{ id: 1, text: "Learn Next.js", assignee: "Faras" }],
-    },
-    {
-      name: "In Progress",
-      tasks: [
-        { id: 2, text: "Learn Advanced React.js", assignee: "Faras" },
-        { id: 3, text: "React Testing / Jest", assignee: "Faras" },
-        { id: 4, text: "Learn Advanced Concepts", assignee: "Faras" },
-      ],
-    },
-    {
-      name: "QA",
-      tasks: [],
-    },
-    {
-      name: "Done",
-      tasks: [
-        { id: 5, text: "Learn React.js", assignee: "Faras" },
-        { id: 6, text: "Learn Redux/Toolkit", assignee: "Faras" },
-        { id: 7, text: "Learn Context API", assignee: "Faras" },
-      ],
-    },
-  ]);
+  const [tasks, setTasks] = useState(db.tasks);
 
-  const [hide, setHide] = useState(false);
 
   const onDragStart = (e, taskId, sourceColumn) => {
     e.dataTransfer.setData("taskId", taskId.toString());
@@ -75,7 +49,7 @@ const Board = () => {
   };
 
   return (
-    <div className="flex items-start justify-center p-6 space-x-6 bg-blue-200 min-h-dvh">
+    <div className="flex items-start justify-center p-6 space-x-6 bg-gray-200 min-h-dvh">
       {tasks.map((item, index) => (
         <Column
           key={index}

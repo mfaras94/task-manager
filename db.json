@@ -1,15 +1,40 @@
 {
   "projects": [],
-  "tasks": [],
+  "tasks": [
+    {
+      "name": "Todo",
+      "tasks": [{ "id": 1, "text": "Learn Next.js", "assignee": "Faras" }]
+    },
+    {
+      "name": "In Progress",
+      "tasks": [
+        { "id": 2, "text": "Learn Advanced React.js", "assignee": "Faras" },
+        { "id": 3, "text": "React Testing / Jest", "assignee": "Faras" },
+        { "id": 4, "text": "Learn Advanced Concepts", "assignee": "Faras" }
+      ]
+    },
+    {
+      "name": "QA",
+      "tasks": []
+    },
+    {
+      "name": "Done",
+      "tasks": [
+        { "id": 5, "text": "Learn React.js", "assignee": "Faras" },
+        { "id": 6, "text": "Learn Redux/Toolkit", "assignee": "Faras" },
+        { "id": 7, "text": "Learn Context API", "assignee": "Faras" }
+      ]
+    }
+  ],
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "username": "user1",
       "password": "pass123",
       "email": "user1@gmail.com"
     },
     {
-      "id": "2",
+      "id": 2,
       "username": "user2",
       "password": "pass456",
       "email": "user2@gmail.com"
