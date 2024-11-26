@@ -9,7 +9,7 @@ const HomePage = () => {
           <div className="flex lg:flex-1">
             <Link to="/" className="-m-1.5 p-1.5 flex items-center">
               <img className="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="" />
-              <span className="sr-only">Task Manager</span>
+              <span className="pl-1 font-serif tracking-widest font-semibold text-gray-700"> Taskify</span>
             </Link>
           </div>
           <div className="flex lg:hidden">

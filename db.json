@@ -3,30 +3,72 @@
   "tasks": [
     {
       "name": "Backlog",
-      "tasks": [{ "id": 9, "text": "Learn Next.js", "assignee": "Faras" }]
+      "tasks": [
+        {
+          "id": 9,
+          "text": "Design landing page layout for new product launch",
+          "assignee": "John Smith"
+        }
+      ]
     },
     {
       "name": "Todo",
-      "tasks": [{ "id": 1, "text": "Learn Next.js", "assignee": "Faras" }]
+      "tasks": [
+        {
+          "id": 1,
+          "text": "Set up database schema for user authentication system",
+          "assignee": "Emily Clark"
+        }
+      ]
     },
     {
       "name": "In Progress",
       "tasks": [
-        { "id": 2, "text": "Learn Advanced React.js", "assignee": "Faras" },
-        { "id": 3, "text": "React Testing / Jest", "assignee": "Faras" },
-        { "id": 4, "text": "Learn Advanced Concepts", "assignee": "Faras" }
+        {
+          "id": 2,
+          "text": "Implement user registration API with JWT authentication",
+          "assignee": "Michael Johnson"
+        },
+        {
+          "id": 3,
+          "text": "Create front-end components for dashboard page",
+          "assignee": "Sarah Lee"
+        },
+        {
+          "id": 4,
+          "text": "Write unit tests for authentication API endpoints",
+          "assignee": "David Nguyen"
+        }
       ]
     },
     {
       "name": "QA",
-      "tasks": []
+      "tasks": [
+        {
+          "id": 8,
+          "text": "Perform end-to-end testing for payment gateway integration",
+          "assignee": "Sophia Turner"
+        }
+      ]
     },
     {
       "name": "Done",
       "tasks": [
-        { "id": 5, "text": "Learn React.js", "assignee": "Faras" },
-        { "id": 6, "text": "Learn Redux/Toolkit", "assignee": "Faras" },
-        { "id": 7, "text": "Learn Context API", "assignee": "Faras" }
+        {
+          "id": 5,
+          "text": "Develop front-end for product listing page",
+          "assignee": "Alex Parker"
+        },
+        {
+          "id": 6,
+          "text": "Integrate user profile editing functionality",
+          "assignee": "Olivia Carter"
+        },
+        {
+          "id": 7,
+          "text": "Implement password reset functionality with email validation",
+          "assignee": "Daniel Garcia"
+        }
       ]
     }
   ],

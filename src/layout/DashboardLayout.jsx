@@ -18,7 +18,7 @@ const DashboardLayout = () => {
                 src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
                 alt=""
               />
-              <span className="sr-only">Task Manager</span>
+              <span className="pl-1 font-serif tracking-widest font-semibold text-gray-700"> Taskify</span>
             </Link>
           </div>
           <div className="flex lg:hidden">
