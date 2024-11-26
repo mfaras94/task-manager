@@ -49,7 +49,7 @@ const Board = () => {
   };
 
   return (
-    <div className="flex items-start justify-center p-6 space-x-6 bg-gray-200 min-h-dvh">
+    <div className="flex items-start justify-center p-6 space-x-6 bg-white h-full w-fit">
       {tasks.map((item, index) => (
         <Column
           key={index}

@@ -1,6 +1,6 @@
 const TaskCard = ({ task, onDragStart, status }) => (
   <div
-    className="p-4 bg-white shadow flex items-start space-x-4 cursor-grab active:cursor-grabbing "
+    className="p-4 bg-white  rounded border flex items-start space-x-4 cursor-grab active:cursor-grabbing  snap-center"
     key={task.id}
     id={task.id}
     draggable
