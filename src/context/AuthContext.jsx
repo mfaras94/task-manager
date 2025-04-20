@@ -5,10 +5,9 @@ import { toast } from "react-toastify";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(sessionStorage.getItem("user"));
   const [isLoading, setIsLoading] = useState(false);
   
-
 
   const handleLogin = async (username, password) => {
     setIsLoading(true)
@@ -16,11 +15,13 @@ const AuthProvider = ({ children }) => {
       const loggedInUser = await login(username, password);
       
       setUser(loggedInUser);
-      // loaclStorage for user keep signed in....
-      localStorage.setItem("user", JSON.stringify(loggedInUser));
-      setIsLoading(false)
+ 
+      sessionStorage.setItem("user", JSON.stringify(loggedInUser));
+
     } catch (error) {
       console.log(error.message);
+    } finally{
+      setIsLoading(false)
     }
   };
 
@@ -29,10 +30,11 @@ const AuthProvider = ({ children }) => {
     try {
       setUser(null);
       toast.success('You are Logout.')
-      localStorage.removeItem("user");
-      setIsLoading(false)
+      sessionStorage.removeItem("user");
     } catch (error) {
       console.log(error.message);
+    } finally{
+      setIsLoading(false)
     }
 
 
@@ -42,10 +44,10 @@ const AuthProvider = ({ children }) => {
     setIsLoading(true)
     try {
       await register(username, password,email)
-      setIsLoading(false)
-      
     } catch (error) {
       console.log(error.message);
+    }finally{
+      setIsLoading(false)
     }
 
   }

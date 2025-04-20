@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/ProtectedRoute ";
 import DashboardPage from "./pages/DashboardPage";
 import HomePage from "./pages/HomePage";
 import Loader from "./components/Loader"
+import DashboardLayout from "./layout/DashboardLayout";
 function App() {
   return (
     <>
@@ -24,7 +25,9 @@ function App() {
       <Router>
         <Routes>
           <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route element={<DashboardLayout/>}>
+              <Route path="/dashboard" element={<DashboardPage />} />
+            </Route>
           </Route>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
